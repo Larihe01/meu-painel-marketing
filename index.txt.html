@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plano de Desenvolvimento | Larissa — Marketing Estratégico</title>
+<style>
+:root{
+ --navy:#16324f;--blue:#245b82;--sky:#e9f2f8;--yellow:#f0c84b;--ink:#23313d;
+ --muted:#61717f;--paper:#f6f8fa;--white:#fff;--line:#dbe3e9;--green:#2f7259;
+ --shadow:0 10px 30px rgba(22,50,79,.08);--radius:18px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--navy)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.hero{background:linear-gradient(135deg,#16324f,#245b82);color:white;padding:42px 22px 34px;border-bottom:5px solid var(--yellow)}
+.wrap{max-width:1120px;margin:auto}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem;font-weight:800;color:var(--yellow)}
+h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;margin:.45rem 0 1rem;max-width:850px}
+.hero p{max-width:780px;color:#e7f0f6;font-size:1.05rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pill{border:1px solid #ffffff55;border-radius:999px;padding:6px 11px;font-size:.85rem}
+.topnav{position:sticky;top:0;z-index:5;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.navinner{max-width:1120px;margin:auto;display:flex;gap:8px;padding:10px 18px;overflow:auto}
+.navinner a{white-space:nowrap;text-decoration:none;padding:8px 12px;border-radius:999px;font-size:.9rem;font-weight:650}
+.navinner a:hover{background:var(--sky)}
+main{max-width:1120px;margin:26px auto;padding:0 18px 60px}
+section{margin:28px 0;scroll-margin-top:80px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}
+h2{font-size:clamp(1.45rem,3vw,2rem);line-height:1.2;color:var(--navy);margin:0}
+h3{margin:.15rem 0 .55rem;color:var(--navy);font-size:1.12rem}
+p{margin:.45rem 0 .7rem}
+.small{font-size:.88rem;color:var(--muted)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px}
+.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+.stat{font-size:1.8rem;font-weight:850;color:var(--navy);line-height:1.1}
+.statlabel{font-size:.88rem;color:var(--muted);margin-top:7px}
+.callout{border-left:4px solid var(--yellow);background:#fff9e5;padding:14px 16px;border-radius:0 12px 12px 0}
+.checklist{display:grid;gap:10px}
+.checkrow{display:flex;gap:10px;align-items:flex-start}
+.checkrow input{margin-top:6px;accent-color:var(--green);width:18px;height:18px;flex-shrink:0}
+.checkrow label{flex:1}
+.progressbar{height:10px;background:#e5ebef;border-radius:99px;overflow:hidden}
+.progressbar span{display:block;height:100%;width:0;background:var(--green);transition:width .2s}
+.progressline{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;margin:10px 0}
+.phase{border-top:4px solid var(--yellow)}
+.phase .weeks{font-size:.8rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.07em}
+.tag{display:inline-block;background:var(--sky);color:var(--navy);border-radius:7px;padding:3px 8px;font-size:.78rem;font-weight:750;margin:2px 3px 2px 0}
+.resource{display:flex;flex-direction:column;gap:8px;height:100%}
+.resource .meta{font-size:.82rem;color:var(--muted)}
+.resource a{font-weight:750}
+.resource ul{margin:.2rem 0;padding-left:1.2rem}
+table{border-collapse:collapse;width:100%;font-size:.94rem}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#eef4f7;color:var(--navy)}
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
+.weekly-grid{display:grid;grid-template-columns:repeat(7,minmax(110px,1fr));gap:8px}
+.day{background:white;border:1px solid var(--line);border-radius:12px;padding:12px;min-height:145px}
+.day strong{display:block;color:var(--navy);margin-bottom:6px}
+.day p{font-size:.88rem}
+textarea,input[type="text"],input[type="date"],select{width:100%;padding:10px 12px;border:1px solid #cbd6de;border-radius:10px;background:white;color:var(--ink)}
+textarea{min-height:100px;resize:vertical}
+.btn{border:0;background:var(--navy);color:white;border-radius:10px;padding:10px 14px;font-weight:750}
+.btn.secondary{background:#eaf1f5;color:var(--navy);border:1px solid var(--line)}
+.btn.yellow{background:var(--yellow);color:var(--navy)}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.bookline{display:flex;gap:13px;align-items:flex-start}
+.booknum{background:var(--navy);color:white;width:34px;height:34px;display:grid;place-items:center;border-radius:10px;flex-shrink:0;font-weight:800}
+details{border:1px solid var(--line);border-radius:12px;padding:13px 15px;background:white}
+details+details{margin-top:9px}
+summary{cursor:pointer;font-weight:750;color:var(--navy)}
+footer{background:#eaf0f4;padding:28px 18px;color:var(--muted);font-size:.9rem}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+@media(max-width:760px){
+ .span-4,.span-6,.span-8{grid-column:span 12}
+ .weekly-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero{padding-top:30px}
+ .section-head{align-items:flex-start;flex-direction:column}
+ th,td{min-width:125px}
+}
+@media print{
+ .topnav,.btnrow,.no-print{display:none!important}
+ body{background:white}.hero{background:#16324f!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ main{max-width:none;margin:0;padding:0 8px}.card{box-shadow:none;break-inside:avoid}a{color:#16324f}
+}
+</style>
+</head>
+<body>
+<div id="authGate" style="position:fixed;inset:0;z-index:1000;background:#f6f8fa;display:grid;place-items:center;padding:20px">
+ <div class="card" style="width:min(100%,430px);padding:28px">
+  <div class="eyebrow" style="color:#245b82">Área pessoal</div><h2 style="margin:8px 0 6px">Seu desenvolvimento, em um só lugar.</h2>
+  <p class="small">Entre com seu e-mail e senha para acessar seus estudos, metas, projetos e anotações.</p>
+  <form id="loginForm" style="margin-top:18px">
+   <label for="loginEmail"><strong>E-mail</strong></label><input id="loginEmail" type="email" autocomplete="username" required placeholder="Seu e-mail">
+   <label for="loginPassword" style="display:block;margin-top:12px"><strong>Senha</strong></label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Sua senha">
+   <button class="btn" style="width:100%;margin-top:16px" type="submit" id="loginButton">Entrar</button>
+  </form>
+  <p id="authMessage" class="small" role="status" style="margin-top:12px">A conta será criada por você no painel do Supabase. Não há cadastro público nesta página.</p>
+ </div>
+</div>
+<div id="appShell" hidden>
+<div style="background:#eaf1f5;border-bottom:1px solid #dbe3e9;padding:8px 18px;font-size:.88rem"><div class="wrap" style="display:flex;justify-content:space-between;gap:10px;align-items:center"><span id="signedUser">Conectado</span><button class="btn secondary" id="logoutButton" type="button">Sair</button></div></div>
+
+<header class="hero">
+ <div class="wrap">
+  <div class="eyebrow">Plano de desenvolvimento profissional · 90 dias</div>
+  <h1>Da execução à visão estratégica de Marketing</h1>
+  <p>Um roteiro prático de estudo, aplicação e reflexão para desenvolver competências de estratégia, gestão, liderança e análise de resultados — com o contexto do Extrabom Be Honest como laboratório de aprendizagem, sem confundir iniciativa com autoridade formal.</p>
+  <div class="hero-tags">
+   <span class="pill">25 min de estudo por dia</span><span class="pill">Aplicação no trabalho</span><span class="pill">Prioridade em recursos gratuitos</span><span class="pill">Revisão semanal</span>
+  </div>
+ </div>
+</header>
+<nav class="topnav"><div class="navinner">
+ <a href="#inicio">Visão geral</a><a href="#workspace">Meu espaço</a><a href="#roteiro">Roteiro de 90 dias</a><a href="#semana">Semana padrão</a><a href="#cursos">Cursos</a><a href="#livros">Livros</a><a href="#conteudos">Podcasts e referências</a><a href="#projetos">Aplicação prática</a><a href="#diario">Diário</a>
+</div></nav>
+<main>
+<section id="workspace">
+ <div class="section-head"><h2>Meu espaço de desenvolvimento</h2><span class="small">Seus registros pessoais, salvos na nuvem.</span></div>
+ <div class="card">
+  <h3>Adicionar um registro</h3>
+  <form id="entryForm">
+   <input type="hidden" id="entryId">
+   <div class="grid">
+    <div class="span-4"><label for="entryCategory"><strong>Categoria</strong></label><select id="entryCategory"><option>Estudo</option><option>Curso</option><option>Livro</option><option>Projeto</option><option>Meta</option><option>Ideia</option><option>Aprendizado</option><option>Diário</option><option>Outro</option></select></div>
+    <div class="span-8"><label for="entryTitle"><strong>Título</strong></label><input id="entryTitle" type="text" maxlength="140" required placeholder="Ex.: Planejamento de Marketing no Sebrae"></div>
+    <div class="span-8"><label for="entryContent"><strong>Descrição / anotações</strong></label><textarea id="entryContent" placeholder="O que você quer guardar? Principais ideias, aprendizados, próximos passos..."></textarea></div>
+    <div class="span-4"><label for="entryStatus"><strong>Status</strong></label><select id="entryStatus"><option>Não iniciado</option><option>Em andamento</option><option>Concluído</option><option>Em pausa</option></select><label for="entryDate" style="display:block;margin-top:12px"><strong>Data (opcional)</strong></label><input id="entryDate" type="date"></div>
+   </div>
+   <div class="btnrow"><button class="btn" type="submit" id="entrySave">Salvar registro</button><button class="btn secondary" type="button" id="entryCancel" hidden>Cancelar edição</button></div>
+  </form>
+ </div>
+ <div class="section-head" style="margin-top:18px"><h2>Meus registros</h2><span class="small" id="entryCount">Carregando...</span></div>
+ <div class="grid" id="entriesList"><div class="card span-12">Entre na sua conta para carregar seus registros.</div></div>
+</section>
+
+<section id="inicio">
+ <div class="section-head"><h2>Seu ponto de partida</h2><span class="small">Revise este plano conforme sua rotina real.</span></div>
+ <div class="grid">
+  <div class="card span-4"><div class="stat">6 pilares</div><div class="statlabel">Estratégia, liderança, dados, finanças, processos e canais de Marketing.</div></div>
+  <div class="card span-4"><div class="stat">90 dias</div><div class="statlabel">Primeiro ciclo de aprendizagem. Não é prazo para virar gerente.</div></div>
+  <div class="card span-4"><div class="stat">1 projeto-piloto</div><div class="statlabel">Testar uma melhoria real e aprender com os resultados.</div></div>
+  <div class="card span-8">
+   <h3>Princípio orientador</h3>
+   <p><strong>Aprender primeiro, aplicar com cuidado e avaliar com evidências.</strong> O objetivo é desenvolver competência de verdade. Uma mudança de cargo pode vir como consequência, mas não é a medida diária do seu valor.</p>
+   <div class="callout">A integração entre Espírito Santo e Belo Horizonte é uma oportunidade de aprender e colaborar. Não assuma a coordenação das colegas sem alinhamento; combine propostas com seu gerente e construa soluções junto com as pessoas envolvidas.</div>
+  </div>
+  <div class="card span-4">
+   <h3>Como usar este roteiro</h3>
+   <ol><li>Escolha a fase atual.</li><li>Faça uma atividade por vez.</li><li>Marque os itens concluídos.</li><li>Registre o que aplicou.</li><li>Revise no fim da semana.</li></ol>
+   <p class="small">Depois do login, seu progresso e suas anotações serão sincronizados com sua conta online.</p>
+  </div>
+ </div>
+</section>
+
+<section id="competencias">
+ <div class="section-head"><h2>Mapa de competências</h2><span class="small">O que estudar e como praticar</span></div>
+ <div class="grid">
+  <div class="card span-6"><span class="tag">01 · Prioridade alta</span><h3>Estratégia e visão de negócio</h3><p>Planejamento estratégico, análise de cenário, segmentação, posicionamento, proposta de valor, concorrência e jornada do cliente.</p><p><strong>Prática:</strong> formular o problema, o público, o objetivo e a hipótese de uma campanha antes de pensar na peça ou no post.</p></div>
+  <div class="card span-6"><span class="tag">02 · Prioridade alta</span><h3>Organização e gestão de projetos</h3><p>Priorização, prazos, responsáveis, processos, reuniões úteis, gestão de demandas e melhoria contínua.</p><p><strong>Prática:</strong> mapear tarefas recorrentes, identificar gargalos e propor uma melhoria pequena após alinhamento.</p></div>
+  <div class="card span-6"><span class="tag">03 · Prioridade alta</span><h3>Relacionamento e liderança</h3><p>Escuta ativa, feedback, negociação, comunicação assertiva, colaboração e gestão de conflitos.</p><p><strong>Prática:</strong> aprender com Ana 1, Ana 2 e Eli, fazendo perguntas sobre seus processos e compartilhando o que você sabe.</p></div>
+  <div class="card span-6"><span class="tag">04 · Prioridade média</span><h3>Indicadores e análise de dados</h3><p>KPIs, métricas de conteúdo, análise de campanhas, planilhas, ROI e transformação de dados em decisões.</p><p><strong>Prática:</strong> selecionar indicadores alinhados ao objetivo, sem confundir curtidas com resultado de negócio.</p></div>
+  <div class="card span-6"><span class="tag">05 · Prioridade média</span><h3>Finanças e visão comercial</h3><p>Orçamento, custos, margem, rentabilidade, investimento em Marketing e relação entre campanhas e resultados comerciais.</p><p><strong>Prática:</strong> pedir contexto sobre orçamento e custos quando apropriado; nunca assumir dados que você não tem.</p></div>
+  <div class="card span-6"><span class="tag">06 · Base contínua</span><h3>Marca e canais digitais</h3><p>Posicionamento, conteúdo, planejamento editorial, mídia paga, comunicação integrada e uso responsável de IA.</p><p><strong>Prática:</strong> construir um calendário editorial conectado aos objetivos da marca e avaliar os resultados periodicamente.</p></div>
+ </div>
+</section>
+
+<section id="roteiro">
+ <div class="section-head"><h2>Roteiro de 90 dias</h2><span class="small">Avance no seu ritmo, sem sobrecarregar a rotina.</span></div>
+ <div class="grid">
+  <div class="card phase span-4">
+   <div class="weeks">Dias 1–30</div><h3>Organizar e compreender</h3>
+   <p><strong>Estudo:</strong> fundamentos de estratégia, persona, jornada do cliente e funil.</p>
+   <div class="checklist">
+    <div class="checkrow"><input type="checkbox" id="d1"><label for="d1">Mapear minhas tarefas recorrentes e os prazos.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d2"><label for="d2">Identificar o que impede o foco nas prioridades.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d3"><label for="d3">Começar o curso de Planejamento de Marketing do Sebrae.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d4"><label for="d4">Conversar com colegas para entender seus processos.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d5"><label for="d5">Registrar dúvidas sobre a integração das frentes.</label></div>
+   </div>
+   <p><strong>Entrega:</strong> mapa da rotina e lista de perguntas para compreender o setor.</p>
+  </div>
+  <div class="card phase span-4">
+   <div class="weeks">Dias 31–60</div><h3>Planejar e experimentar</h3>
+   <p><strong>Estudo:</strong> análise de cenário, posicionamento, objetivos, KPIs e gestão de projetos.</p>
+   <div class="checklist">
+    <div class="checkrow"><input type="checkbox" id="d6"><label for="d6">Concluir o curso inicial e registrar os aprendizados.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d7"><label for="d7">Estudar como definir objetivos e indicadores.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d8"><label for="d8">Identificar uma oportunidade de colaboração entre BH e ES.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d9"><label for="d9">Alinhar a proposta com o gerente antes de executar.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d10"><label for="d10">Testar uma melhoria pequena com as pessoas envolvidas.</label></div>
+   </div>
+   <p><strong>Entrega:</strong> uma melhoria-piloto combinada e acompanhada.</p>
+  </div>
+  <div class="card phase span-4">
+   <div class="weeks">Dias 61–90</div><h3>Avaliar e consolidar</h3>
+   <p><strong>Estudo:</strong> análise de resultados, fundamentos financeiros e liderança.</p>
+   <div class="checklist">
+    <div class="checkrow"><input type="checkbox" id="d11"><label for="d11">Estudar métricas adequadas ao objetivo da iniciativa.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d12"><label for="d12">Registrar o que funcionou, o que não funcionou e por quê.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d13"><label for="d13">Compartilhar aprendizados com o gerente.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d14"><label for="d14">Identificar minhas próximas lacunas de conhecimento.</label></div>
+    <div class="checkrow"><input type="checkbox" id="d15"><label for="d15">Definir o próximo ciclo de estudos.</label></div>
+   </div>
+   <p><strong>Entrega:</strong> retrospectiva documentada e próximos passos de desenvolvimento.</p>
+  </div>
+  <div class="card span-12">
+   <div class="progressline"><strong>Progresso das tarefas marcadas</strong><span id="progressText">0 de 15 (0%)</span></div>
+   <div class="progressbar"><span id="progressFill"></span></div>
+   <p class="small">A barra conta as 15 tarefas do roteiro de 90 dias. Ela não mede seu valor ou sua competência; apenas ajuda a visualizar o andamento.</p>
+  </div>
+ </div>
+</section>
+
+<section id="semana">
+ <div class="section-head"><h2>Semana padrão de estudos</h2><span class="small">25 minutos por sessão já criam consistência.</span></div>
+ <div class="weekly-grid">
+  <div class="day"><strong>Segunda</strong><span class="tag">Estratégia</span><p>Estude um conceito e escreva um exemplo relacionado ao negócio.</p></div>
+  <div class="day"><strong>Terça</strong><span class="tag">Curso</span><p>Avance em um módulo do curso principal.</p></div>
+  <div class="day"><strong>Quarta</strong><span class="tag">Pessoas</span><p>Leia sobre comunicação, liderança ou negociação.</p></div>
+  <div class="day"><strong>Quinta</strong><span class="tag">Dados</span><p>Estude uma métrica ou uma noção financeira.</p></div>
+  <div class="day"><strong>Sexta</strong><span class="tag">Revisão</span><p>Registre três aprendizados e uma dúvida.</p></div>
+  <div class="day"><strong>Sábado</strong><span class="tag">Opcional</span><p>Podcast, palestra ou leitura leve, se houver tempo.</p></div>
+  <div class="day"><strong>Domingo</strong><span class="tag">Descanso</span><p>Descanse ou planeje a semana em 10 minutos. Não precisa compensar tudo.</p></div>
+ </div>
+ <div class="callout" style="margin-top:14px">Regra prática: não tente estudar todos os temas ao mesmo tempo. Um tema principal por semana, um curso por vez e aplicação gradual no trabalho.</div>
+</section>
+
+<section id="cursos">
+ <div class="section-head"><h2>Cursos e recursos gratuitos</h2><span class="small">Links oficiais; confira disponibilidade e condições ao acessar.</span></div>
+ <div class="grid">
+  <div class="card span-6 resource">
+   <span class="tag">Comece aqui · 6 horas</span><h3>Planejamento de Marketing: ferramentas práticas</h3>
+   <div class="meta">Sebrae · Online · Gratuito · Certificado ao concluir</div>
+   <p>Persona, jornada do cliente e funil de vendas. É a primeira formação recomendada porque conecta conhecimento de cliente ao planejamento.</p>
+   <a href="https://sebrae.com.br/sites/PortalSebrae/cursosonline/planejamento-de-marketing-ferramentas-praticas,c8c0b8a6a28bb610VgnVCM1000004c00210aRCRD" target="_blank" rel="noopener">Abrir curso oficial ↗</a>
+  </div>
+  <div class="card span-6 resource">
+   <span class="tag">Estratégia · 3 horas</span><h3>Planejamento estratégico para empreendedores</h3>
+   <div class="meta">Sebrae · Online · Gratuito</div>
+   <p>Objetivos, análise de cenário, estratégias, plano de ação e competências para liderar a implementação.</p>
+   <a href="https://sebrae.com.br/sites/PortalSebrae/cursosonline/planejamento-estrategico-para-empreendedores,5580b8a6a28bb610VgnVCM1000004c00210aRCRD" target="_blank" rel="noopener">Abrir curso oficial ↗</a>
+  </div>
+  <div class="card span-6 resource">
+   <span class="tag">Marketing digital · 8 horas</span><h3>Marketing digital: estratégias e práticas para conquistar clientes</h3>
+   <div class="meta">Sebrae · Online · Gratuito</div>
+   <p>Comportamento do consumidor digital, conteúdo, SEO, copywriting, storytelling e atração e fidelização.</p>
+   <a href="https://go.loja.sebrae.com.br/marketing-digital-estrategias-e-praticas-para-conquistar-clientes-1-372000110038" target="_blank" rel="noopener">Abrir curso oficial ↗</a>
+  </div>
+  <div class="card span-6 resource">
+   <span class="tag">Análise de resultados</span><h3>Catálogo de cursos online do Sebrae</h3>
+   <div class="meta">Vários cursos gratuitos; duração varia</div>
+   <p>Pesquise por análise de resultados em Marketing Digital, redes sociais, finanças, atendimento e gestão de pessoas. Escolha o próximo curso de acordo com uma lacuna concreta.</p>
+   <a href="https://loja.sebrae.com.br/cursos/cursos-online" target="_blank" rel="noopener">Explorar catálogo oficial ↗</a>
+  </div>
+  <div class="card span-6 resource">
+   <span class="tag">Aprendizado contínuo</span><h3>Sebrae Play</h3>
+   <div class="meta">Aulas gravadas, conteúdos e cursos</div>
+   <p>Procure Planejamento de Marketing Digital e materiais sobre gestão, empreendedorismo, estratégia e análise de mercado.</p>
+   <a href="https://www.sebraeplay.com.br/" target="_blank" rel="noopener">Abrir Sebrae Play ↗</a>
+  </div>
+  <div class="card span-6 resource">
+   <span class="tag">Digital · Gratuito</span><h3>HubSpot Academy</h3>
+   <div class="meta">Cursos gratuitos; idioma e duração variam</div>
+   <p>Explore Marketing Digital, conteúdo, inbound, e-mail e análise. Confira o idioma disponível e priorize módulos úteis para seu plano.</p>
+   <a href="https://academy.hubspot.com/courses/digital-marketing" target="_blank" rel="noopener">Abrir curso de Digital Marketing ↗</a>
+  </div>
+  <div class="card span-6 resource">
+   <span class="tag">Ferramentas de dados</span><h3>Google Skillshop e Analytics</h3>
+   <div class="meta">Materiais de aprendizagem; algumas certificações podem ter requisitos próprios</div>
+   <p>Estude mensuração, fundamentos de Analytics e interpretação de dados. Aprenda primeiro o conceito; a ferramenta vem depois.</p>
+   <a href="https://skillshop.withgoogle.com/" target="_blank" rel="noopener">Abrir Google Skillshop ↗</a>
+  </div>
+  <div class="card span-6 resource">
+   <span class="tag">Liderança e gestão</span><h3>Escola Virtual Fundação Bradesco</h3>
+   <div class="meta">Catálogo online; cursos gratuitos conforme disponibilidade</div>
+   <p>Pesquise comunicação empresarial, administração, produtividade, Excel e gestão de projetos para complementar sua formação.</p>
+   <a href="https://www.ev.org.br/" target="_blank" rel="noopener">Explorar Escola Virtual ↗</a>
+  </div>
+ </div>
+ <p class="small">Os cursos e catálogos podem mudar. Confirme preço, idioma, carga horária, certificado e elegibilidade na página oficial antes de se inscrever. Não é necessário pagar por uma formação agora.</p>
+</section>
+
+<section id="livros">
+ <div class="section-head"><h2>Biblioteca de desenvolvimento</h2><span class="small">Leia em sequência; não compre tudo de uma vez.</span></div>
+ <div class="grid">
+  <div class="card span-6">
+   <div class="bookline"><div class="booknum">1</div><div><h3>Administração de Marketing — Philip Kotler e Kevin Lane Keller</h3><span class="tag">Fundamentos de Marketing</span></div></div>
+   <p>Segmentação, posicionamento, comportamento do consumidor, planejamento e gestão de Marketing. Use como referência por assunto; não precisa ler de capa a capa de uma vez.</p>
+   <p><strong>Pergunta de leitura:</strong> como o Marketing contribui para criar valor e atingir os objetivos do negócio?</p>
+   <a href="https://www.pearson.com/" target="_blank" rel="noopener">Editora Pearson ↗</a>
+  </div>
+  <div class="card span-6">
+   <div class="bookline"><div class="booknum">2</div><div><h3>Good Strategy/Bad Strategy — Richard Rumelt</h3><span class="tag">Pensamento estratégico</span></div></div>
+   <p>Ajuda a distinguir estratégia de listas de desejos, slogans ou tarefas soltas. Excelente para aprender a formular o problema central e escolher ações coerentes.</p>
+   <p><strong>Pergunta de leitura:</strong> qual é o desafio real e que conjunto de ações responde a ele?</p>
+   <a href="https://www.richardrumelt.com/" target="_blank" rel="noopener">Site do autor ↗</a>
+  </div>
+  <div class="card span-6">
+   <div class="bookline"><div class="booknum">3</div><div><h3>The Making of a Manager — Julie Zhuo</h3><span class="tag">Gestão de pessoas</span></div></div>
+   <p>Explora a transição de executar tarefas para apoiar o desempenho de outras pessoas. Útil para refletir sobre comunicação, reuniões, feedback e desenvolvimento de equipes.</p>
+   <p><strong>Pergunta de leitura:</strong> o que muda quando o resultado depende de um time, não só de mim?</p>
+   <a href="https://www.juliezhuo.com/" target="_blank" rel="noopener">Site da autora ↗</a>
+  </div>
+  <div class="card span-6">
+   <div class="bookline"><div class="booknum">4</div><div><h3>Measure What Matters — John Doerr</h3><span class="tag">Objetivos e resultados</span></div></div>
+   <p>Apresenta OKRs, uma maneira de conectar objetivos a resultados-chave. Não aplique a metodologia inteira sem contexto; use-a para aprender a tornar objetivos mais claros.</p>
+   <p><strong>Pergunta de leitura:</strong> como saberemos que a iniciativa alcançou seu objetivo?</p>
+   <a href="https://www.whatmatters.com/" target="_blank" rel="noopener">What Matters ↗</a>
+  </div>
+  <div class="card span-6">
+   <div class="bookline"><div class="booknum">5</div><div><h3>A Estratégia do Oceano Azul — W. Chan Kim e Renée Mauborgne</h3><span class="tag">Diferenciação</span></div></div>
+   <p>Estimula o pensamento sobre diferenciação e criação de valor. Use para formular hipóteses, sem presumir que toda ideia nova seja uma oportunidade viável.</p>
+   <p><strong>Pergunta de leitura:</strong> que valor o cliente percebe e o que pode diferenciar a marca?</p>
+   <a href="https://www.blueoceanstrategy.com/" target="_blank" rel="noopener">Blue Ocean Strategy ↗</a>
+  </div>
+  <div class="card span-6">
+   <div class="bookline"><div class="booknum">6</div><div><h3>Comece pelo Porquê — Simon Sinek</h3><span class="tag">Propósito e comunicação</span></div></div>
+   <p>Uma leitura complementar sobre propósito e comunicação de ideias. Use-a como reflexão, não como substituto de estratégia, pesquisa ou análise de resultados.</p>
+   <p><strong>Pergunta de leitura:</strong> conseguimos explicar por que uma iniciativa importa para o público e para a empresa?</p>
+   <a href="https://simonsinek.com/" target="_blank" rel="noopener">Site do autor ↗</a>
+  </div>
+ </div>
+ <div class="callout" style="margin-top:14px">Prioridade sugerida: comece com Kotler/Keller e Rumelt. Busque biblioteca, empréstimo ou edição legítima acessível. Os títulos em inglês podem ter traduções disponíveis; confira a edição antes de comprar.</div>
+</section>
+
+<section id="conteudos">
+ <div class="section-head"><h2>Podcasts, pessoas e fontes para acompanhar</h2><span class="small">Consuma com intenção, não por volume.</span></div>
+ <div class="grid">
+  <div class="card span-6">
+   <h3>Podcasts e entrevistas</h3>
+   <ul>
+    <li><strong>Like a Boss:</strong> entrevistas com empreendedores e líderes; procure episódios sobre crescimento, estratégia e gestão. <a href="https://www.likeaboss.com.br/episodios/" target="_blank" rel="noopener">Episódios ↗</a></li>
+    <li><strong>CBN Professional:</strong> conversas sobre gestão, negócios e liderança. <a href="https://podcasts.apple.com/br/podcast/cbn-professional/id1234306413" target="_blank" rel="noopener">Ouvir ↗</a></li>
+    <li><strong>TED Talks:</strong> palestras sobre comunicação, criatividade, decisão e trabalho em equipe. <a href="https://www.ted.com/talks" target="_blank" rel="noopener">Explorar ↗</a></li>
+    <li><strong>Sebrae Play:</strong> aulas e entrevistas em português sobre gestão, Marketing e empreendedorismo. <a href="https://www.sebraeplay.com.br/" target="_blank" rel="noopener">Assistir ↗</a></li>
+   </ul>
+   <p class="small">A disponibilidade dos programas e episódios pode mudar. Escolha conteúdos alinhados ao tema que está estudando naquela semana.</p>
+  </div>
+  <div class="card span-6">
+   <h3>Autores e profissionais para estudar</h3>
+   <ul>
+    <li><strong>Philip Kotler:</strong> fundamentos e gestão de Marketing.</li>
+    <li><strong>Richard Rumelt:</strong> formulação de estratégia e diagnóstico de problemas.</li>
+    <li><strong>Julie Zhuo:</strong> desenvolvimento de gestores e equipes.</li>
+    <li><strong>John Doerr:</strong> objetivos e resultados-chave (OKRs).</li>
+    <li><strong>W. Chan Kim e Renée Mauborgne:</strong> diferenciação e criação de valor.</li>
+    <li><strong>April Dunford:</strong> posicionamento de produtos e serviços.</li>
+    <li><strong>Leslie Zane:</strong> marca, memória e comportamento do consumidor.</li>
+   </ul>
+   <p class="small">Use livros, entrevistas e materiais dos autores para conhecer ideias e métodos. Compare perspectivas e procure evidências antes de aplicar uma recomendação.</p>
+  </div>
+  <div class="card span-12">
+   <h3>Como escolher o próximo episódio ou palestra</h3>
+   <div class="grid">
+    <div class="span-4"><strong>Se está estudando estratégia</strong><p>Busque entrevistas sobre posicionamento, diagnóstico, concorrência e decisões de negócio.</p></div>
+    <div class="span-4"><strong>Se está estudando liderança</strong><p>Busque conversas sobre feedback, delegação, conflito e desenvolvimento de pessoas.</p></div>
+    <div class="span-4"><strong>Se está estudando dados</strong><p>Busque conteúdos sobre métricas, experimentos, análise de campanhas e tomada de decisão.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="projetos">
+ <div class="section-head"><h2>Aplicação prática no trabalho</h2><span class="small">Aprender sem criar sobrecarga nem ultrapassar seu papel.</span></div>
+ <div class="grid">
+  <div class="card span-6">
+   <h3>Projeto A · Organizar a própria rotina</h3>
+   <p><strong>Objetivo:</strong> identificar o que ocupa seu tempo e proteger espaço para atividades prioritárias.</p>
+   <ul><li>Liste tarefas recorrentes e demandas pontuais.</li><li>Classifique por prazo, importância e dependências.</li><li>Identifique o que pode ser simplificado, combinado ou precisa de alinhamento.</li><li>Revise semanalmente com seu gerente quando houver conflitos de prioridade.</li></ul>
+   <p><strong>Evidência:</strong> prioridades mais claras e menos decisões improvisadas.</p>
+  </div>
+  <div class="card span-6">
+   <h3>Projeto B · Aprender com as colegas</h3>
+   <p><strong>Objetivo:</strong> conhecer os processos e competências de cada frente de Marketing.</p>
+   <ul><li>Pergunte como cada pessoa organiza suas demandas.</li><li>Entenda quais informações precisam receber de outras frentes.</li><li>Compartilhe também práticas que funcionam no ES.</li><li>Registre oportunidades de colaboração sem presumir soluções.</li></ul>
+   <p><strong>Evidência:</strong> mapa de aprendizados e oportunidades, construído com respeito à equipe.</p>
+  </div>
+  <div class="card span-6">
+   <h3>Projeto C · Teste de integração</h3>
+   <p><strong>Objetivo:</strong> experimentar uma melhoria simples de colaboração entre BH e ES.</p>
+   <ul><li>Escolha com as pessoas envolvidas um problema delimitado.</li><li>Combine a proposta com seu gerente.</li><li>Defina responsáveis, prazo e como avaliar o teste.</li><li>Faça uma retrospectiva e compartilhe os aprendizados.</li></ul>
+   <p><strong>Evidência:</strong> um processo testado e uma avaliação honesta do que mudou.</p>
+  </div>
+  <div class="card span-6">
+   <h3>Projeto D · Dar foco ao Instagram</h3>
+   <p><strong>Objetivo:</strong> planejar conteúdo de forma conectada aos objetivos da marca.</p>
+   <ul><li>Defina público, objetivo e mensagem de cada linha de conteúdo.</li><li>Monte um calendário editorial realista.</li><li>Escolha indicadores adequados ao objetivo de cada publicação.</li><li>Revise resultados periodicamente e ajuste o plano.</li></ul>
+   <p><strong>Evidência:</strong> consistência de planejamento e aprendizado a partir de métricas, sem prometer resultados que não controla.</p>
+  </div>
+ </div>
+ <div class="callout" style="margin-top:14px"><strong>Limite saudável:</strong> não tente executar os quatro projetos ao mesmo tempo. Comece pela organização da rotina; depois escolha, com alinhamento, uma oportunidade de colaboração. O foco é aprender e melhorar, não acrescentar trabalho indefinidamente.</div>
+</section>
+
+<section id="diario">
+ <div class="section-head"><h2>Diário de aprendizagem</h2><span class="small">Registre uma reflexão por semana.</span></div>
+ <div class="grid">
+  <div class="card span-6">
+   <label for="weekDate"><strong>Semana de</strong></label><input id="weekDate" type="date">
+   <label for="learned" style="display:block;margin-top:12px"><strong>O que aprendi?</strong></label><textarea id="learned" placeholder="Conceito, livro, curso, podcast ou conversa..."></textarea>
+   <label for="applied" style="display:block;margin-top:12px"><strong>O que apliquei ou observei no trabalho?</strong></label><textarea id="applied" placeholder="Uma situação concreta, sem informações confidenciais..."></textarea>
+  </div>
+  <div class="card span-6">
+   <label for="questions"><strong>O que ainda preciso entender?</strong></label><textarea id="questions" placeholder="Dúvidas, habilidades a desenvolver, processos que quero compreender..."></textarea>
+   <label for="next" style="display:block;margin-top:12px"><strong>Minha prioridade para a próxima semana</strong></label><textarea id="next" placeholder="Escolha uma prioridade possível e específica..."></textarea>
+   <div class="btnrow no-print"><button class="btn" id="saveDiary" type="button">Salvar reflexão no histórico</button><button class="btn secondary" id="exportNotes" type="button">Baixar minhas notas (.txt)</button><button class="btn secondary" id="clearNotes" type="button">Limpar campos</button></div>
+   <p class="small">O rascunho é sincronizado com sua conta. Ao clicar em “Salvar reflexão no histórico”, uma cópia será criada em Meus registros. Não registre dados de clientes, informações internas confidenciais ou dados pessoais da empresa.</p>
+  </div>
+ </div>
+</section>
+
+<section id="revisao">
+ <div class="section-head"><h2>Revisão mensal</h2><span class="small">Competência é demonstrada por prática e evidência.</span></div>
+ <div class="card">
+  <div class="checklist">
+   <div class="checkrow"><input type="checkbox" id="r1"><label for="r1">Consigo explicar melhor o objetivo por trás das ações de Marketing.</label></div>
+   <div class="checkrow"><input type="checkbox" id="r2"><label for="r2">Estou organizando as demandas com mais clareza e alinhando prioridades.</label></div>
+   <div class="checkrow"><input type="checkbox" id="r3"><label for="r3">Aprendi com as colegas e também compartilhei conhecimento.</label></div>
+   <div class="checkrow"><input type="checkbox" id="r4"><label for="r4">Consigo escolher indicadores que fazem sentido para um objetivo.</label></div>
+   <div class="checkrow"><input type="checkbox" id="r5"><label for="r5">Tenho um exemplo concreto de melhoria ou aprendizado aplicado.</label></div>
+   <div class="checkrow"><input type="checkbox" id="r6"><label for="r6">Sei qual competência será meu foco no próximo mês.</label></div>
+  </div>
+  <hr>
+  <h3>Próximo passo de carreira</h3>
+  <p>Quando houver uma base de experiência e exemplos concretos, converse com seu gerente sobre suas competências em desenvolvimento e peça feedback específico. Busque entender as responsabilidades e expectativas de uma futura liderança nacional, sem pressupor que a vaga esteja garantida.</p>
+ </div>
+</section>
+</main>
+<footer><div class="wrap"><strong>Plano de Desenvolvimento Profissional · Larissa</strong><p>Este roteiro é um ponto de partida flexível. Recursos externos podem mudar. Priorize estudo consistente, aplicação responsável, colaboração e reflexão. O objetivo é desenvolver capacidade profissional sustentável, não correr atrás de um título a qualquer custo.</p><p>Para guardar uma cópia, use “Imprimir / Salvar em PDF” no navegador. Seu progresso e suas notas são sincronizados com sua conta Supabase quando estiver conectado.</p><div class="btnrow no-print"><button class="btn" onclick="window.print()">Imprimir / Salvar em PDF</button><button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Voltar ao topo ↑</button></div></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// CONFIGURE estes dois valores depois de criar seu projeto no Supabase.
+const SUPABASE_URL = 'https://tdjgfnsysjuzlyojnlbj.supabase.co/rest/v1/';
+const SUPABASE_ANON_KEY = 'sb_publishable_VH0IUQr1KRNM8Bp3n_GwQQ_CjhtcAM1  ';
+const configured = !SUPABASE_URL.startsWith('COLE_') && !SUPABASE_ANON_KEY.startsWith('COLE_');
+let supabaseClient = null;
+let currentUser = null;
+let saveTimer = null;
+const $ = id => document.getElementById(id);
+const diaryIds = ['weekDate','learned','applied','questions','next'];
+const roadmapBoxes = [...document.querySelectorAll('#roteiro input[type="checkbox"]')];
+const allBoxes = [...document.querySelectorAll('input[type="checkbox"]')];
+function message(text, error=false){ $('authMessage').textContent=text; $('authMessage').style.color=error?'#a12d2d':'#61717f'; }
+function updateProgress(){const done=roadmapBoxes.filter(b=>b.checked).length;const pct=Math.round(done/roadmapBoxes.length*100);$('progressText').textContent=`${done} de ${roadmapBoxes.length} (${pct}%)`;$('progressFill').style.width=pct+'%';}
+function collectState(){const checks={};allBoxes.forEach(b=>{if(b.id)checks[b.id]=b.checked});const diary={};diaryIds.forEach(id=>diary[id]=$(id).value);return {checks,diary};}
+async function saveState(){if(!currentUser)return;const state=collectState();const {error}=await supabaseClient.from('roadmap_state').upsert({user_id:currentUser.id,checkboxes:state.checks,diary:state.diary,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)console.error('Falha ao salvar progresso:',error.message);}
+function scheduleSave(){updateProgress();clearTimeout(saveTimer);saveTimer=setTimeout(saveState,450);}
+async function loadState(){const {data,error}=await supabaseClient.from('roadmap_state').select('checkboxes,diary').eq('user_id',currentUser.id).maybeSingle();if(error){console.error(error);return;}if(data){Object.entries(data.checkboxes||{}).forEach(([id,value])=>{const el=$(id);if(el&&el.type==='checkbox')el.checked=!!value});Object.entries(data.diary||{}).forEach(([id,value])=>{const el=$(id);if(el)el.value=value||''});}updateProgress();}
+function safeText(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function loadEntries(){const {data,error}=await supabaseClient.from('workspace_entries').select('*').eq('user_id',currentUser.id).order('created_at',{ascending:false});if(error){$('entriesList').innerHTML='<div class="card span-12">Não foi possível carregar os registros. Confira a configuração do banco.</div>';console.error(error);return;} $('entryCount').textContent=`${data.length} registro(s)`;if(!data.length){$('entriesList').innerHTML='<div class="card span-12">Você ainda não salvou registros. Use o formulário acima para começar.</div>';return;} $('entriesList').innerHTML=data.map(e=>`<article class="card span-6"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span class="tag">${safeText(e.category)}</span><span class="small">${safeText(e.status||'')}</span></div><h3>${safeText(e.title)}</h3><p style="white-space:pre-wrap">${safeText(e.content||'')}</p><p class="small">${e.due_date?'Data: '+safeText(e.due_date):''}</p><div class="btnrow"><button class="btn secondary" type="button" data-edit="${e.id}">Editar</button><button class="btn secondary" type="button" data-delete="${e.id}">Excluir</button></div></article>`).join('');}
+function resetEntryForm(){ $('entryForm').reset();$('entryId').value='';$('entrySave').textContent='Salvar registro';$('entryCancel').hidden=true; }
+$('entryForm').addEventListener('submit',async ev=>{ev.preventDefault();if(!currentUser)return;const id=$('entryId').value;const payload={user_id:currentUser.id,category:$('entryCategory').value,title:$('entryTitle').value.trim(),content:$('entryContent').value.trim(),status:$('entryStatus').value,due_date:$('entryDate').value||null};if(!payload.title)return;const request=id?supabaseClient.from('workspace_entries').update(payload).eq('id',id).eq('user_id',currentUser.id):supabaseClient.from('workspace_entries').insert(payload);const {error}=await request;if(error){alert('Não foi possível salvar. Confira sua conexão e a configuração do Supabase.');console.error(error);return;}resetEntryForm();await loadEntries();});
+$('entriesList').addEventListener('click',async ev=>{const edit=ev.target.closest('[data-edit]');const del=ev.target.closest('[data-delete]');if(edit){const {data,error}=await supabaseClient.from('workspace_entries').select('*').eq('id',edit.dataset.edit).eq('user_id',currentUser.id).single();if(error)return; $('entryId').value=data.id;$('entryCategory').value=data.category;$('entryTitle').value=data.title;$('entryContent').value=data.content||'';$('entryStatus').value=data.status||'Não iniciado';$('entryDate').value=data.due_date||'';$('entrySave').textContent='Atualizar registro';$('entryCancel').hidden=false;$('entryForm').scrollIntoView({behavior:'smooth'});}if(del&&confirm('Excluir este registro?')){const {error}=await supabaseClient.from('workspace_entries').delete().eq('id',del.dataset.delete).eq('user_id',currentUser.id);if(!error)loadEntries();}});
+$('entryCancel').addEventListener('click',resetEntryForm);
+$('saveDiary').addEventListener('click',async()=>{if(!currentUser)return;const vals=diaryIds.map(id=>$(id).value.trim());if(!vals.some(Boolean)){alert('Preencha pelo menos um campo da reflexão.');return;}const content=`O que aprendi:\n${vals[1]}\n\nO que apliquei ou observei:\n${vals[2]}\n\nO que preciso entender:\n${vals[3]}\n\nPrioridade da próxima semana:\n${vals[4]}`;const {error}=await supabaseClient.from('workspace_entries').insert({user_id:currentUser.id,category:'Diário',title:'Reflexão da semana '+(vals[0]||new Date().toLocaleDateString('pt-BR')),content,status:'Concluído',due_date:vals[0]||null});if(error){alert('Não foi possível salvar a reflexão.');console.error(error);return;}await loadEntries();alert('Reflexão salva em Meus registros.');});
+$('exportNotes').addEventListener('click',()=>{const fields=[['Semana de','weekDate'],['O que aprendi','learned'],['O que apliquei ou observei','applied'],['O que preciso entender','questions'],['Prioridade da próxima semana','next']];const content=fields.map(([label,id])=>label+':\n'+$(id).value+'\n').join('\n');const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='diario-aprendizagem.txt';a.click();URL.revokeObjectURL(url);});
+$('clearNotes').addEventListener('click',()=>{if(confirm('Limpar os campos do diário?')){diaryIds.forEach(id=>$(id).value='');scheduleSave();}});
+allBoxes.forEach(b=>b.addEventListener('change',scheduleSave));diaryIds.forEach(id=>$(id).addEventListener('input',scheduleSave));
+async function showApp(user){currentUser=user;$('authGate').hidden=true;$('appShell').hidden=false;$('signedUser').textContent='Conectado: '+user.email;await loadState();await loadEntries();}
+async function signOut(){await supabaseClient.auth.signOut();currentUser=null;$('appShell').hidden=true;$('authGate').hidden=false;}
+$('logoutButton').addEventListener('click',signOut);
+$('loginForm').addEventListener('submit',async ev=>{ev.preventDefault();if(!configured){message('Antes do login, configure a URL e a chave do Supabase no arquivo index.html.',true);return;}const btn=$('loginButton');btn.disabled=true;btn.textContent='Entrando...';const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});btn.disabled=false;btn.textContent='Entrar';if(error){message('Não foi possível entrar. Confira e-mail e senha.',true);return;}message('Login realizado.');await showApp(data.user);});
+if(configured&&window.supabase){supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);supabaseClient.auth.getSession().then(async({data})=>{if(data.session)await showApp(data.session.user);});supabaseClient.auth.onAuthStateChange(async(event,session)=>{if(event==='SIGNED_IN'&&session&&!currentUser)await showApp(session.user);if(event==='SIGNED_OUT'){currentUser=null;$('appShell').hidden=true;$('authGate').hidden=false;}});}else{message('Configuração pendente: siga o arquivo LEIA-ME para conectar o Supabase.');}
+updateProgress();
+</script>
+</div>
+</body>
+</html>
