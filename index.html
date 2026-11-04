@@ -88,30 +88,11 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
  body{background:white}.hero{background:#16324f!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  main{max-width:none;margin:0;padding:0 8px}.card{box-shadow:none;break-inside:avoid}a{color:#16324f}
 }
+.cloud-status{background:#eaf1f5;border-bottom:1px solid #dbe3e9;padding:9px 18px;text-align:center;font-size:.88rem;color:#245b82;font-weight:650}
 </style>
 </head>
 <body>
-<div id="authGate" style="position:fixed;inset:0;z-index:1000;background:#f6f8fa;display:grid;place-items:center;padding:20px">
- <div class="card" style="width:min(100%,430px);padding:28px">
-  <div class="eyebrow" style="color:#245b82">Área pessoal</div><h2 style="margin:8px 0 6px">Seu desenvolvimento, em um só lugar.</h2>
-  <p class="small">Entre com seu e-mail e senha para acessar seus estudos, metas, projetos e anotações.</p>
-  <form id="loginForm" style="margin-top:18px">
-   <label for="loginEmail"><strong>E-mail</strong></label><input id="loginEmail" type="email" autocomplete="username" required placeholder="Seu e-mail">
-   <label for="loginPassword" style="display:block;margin-top:12px"><strong>Senha</strong></label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Sua senha">
-   <button class="btn" style="width:100%;margin-top:16px" type="submit" id="loginButton">Entrar</button>
-  </form>
-  <form id="resetPasswordForm" style="margin-top:18px;display:none">
-   <p><strong>Crie sua nova senha</strong></p>
-   <label for="newPassword"><strong>Nova senha</strong></label><input id="newPassword" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite a nova senha">
-   <label for="confirmNewPassword" style="display:block;margin-top:12px"><strong>Confirme a nova senha</strong></label><input id="confirmNewPassword" type="password" autocomplete="new-password" minlength="6" required placeholder="Digite novamente a nova senha">
-   <button class="btn" style="width:100%;margin-top:16px" type="submit" id="resetPasswordButton">Salvar nova senha</button>
-  </form>
-  <p id="authMessage" class="small" role="status" style="margin-top:12px">A conta será criada por você no painel do Supabase. Não há cadastro público nesta página.</p>
- </div>
-</div>
-<div id="appShell" hidden>
-<div style="background:#eaf1f5;border-bottom:1px solid #dbe3e9;padding:8px 18px;font-size:.88rem"><div class="wrap" style="display:flex;justify-content:space-between;gap:10px;align-items:center"><span id="signedUser">Conectado</span><button class="btn secondary" id="logoutButton" type="button">Sair</button></div></div>
-
+<div class="cloud-status" id="cloudStatus">Conectando ao painel compartilhado…</div>
 <header class="hero">
  <div class="wrap">
   <div class="eyebrow">Plano de desenvolvimento profissional · 90 dias</div>
@@ -127,7 +108,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 </div></nav>
 <main>
 <section id="workspace">
- <div class="section-head"><h2>Meu espaço de desenvolvimento</h2><span class="small">Seus registros pessoais, salvos na nuvem.</span></div>
+ <div class="section-head"><h2>Meu espaço de desenvolvimento</h2><span class="small">Registros compartilhados, salvos na nuvem.</span></div>
  <div class="card">
   <h3>Adicionar um registro</h3>
   <form id="entryForm">
@@ -142,7 +123,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
   </form>
  </div>
  <div class="section-head" style="margin-top:18px"><h2>Meus registros</h2><span class="small" id="entryCount">Carregando...</span></div>
- <div class="grid" id="entriesList"><div class="card span-12">Entre na sua conta para carregar seus registros.</div></div>
+ <div class="grid" id="entriesList"><div class="card span-12">Carregando seus registros compartilhados…</div></div>
 </section>
 
 <section id="inicio">
@@ -159,7 +140,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
   <div class="card span-4">
    <h3>Como usar este roteiro</h3>
    <ol><li>Escolha a fase atual.</li><li>Faça uma atividade por vez.</li><li>Marque os itens concluídos.</li><li>Registre o que aplicou.</li><li>Revise no fim da semana.</li></ol>
-   <p class="small">Depois do login, seu progresso e suas anotações serão sincronizados com sua conta online.</p>
+   <p class="small">Seu progresso e suas anotações ficam sincronizados na nuvem e aparecem em todos os dispositivos.</p>
   </div>
  </div>
 </section>
@@ -437,94 +418,37 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
  </div>
 </section>
 </main>
-<footer><div class="wrap"><strong>Plano de Desenvolvimento Profissional · Larissa</strong><p>Este roteiro é um ponto de partida flexível. Recursos externos podem mudar. Priorize estudo consistente, aplicação responsável, colaboração e reflexão. O objetivo é desenvolver capacidade profissional sustentável, não correr atrás de um título a qualquer custo.</p><p>Para guardar uma cópia, use “Imprimir / Salvar em PDF” no navegador. Seu progresso e suas notas são sincronizados com sua conta Supabase quando estiver conectado.</p><div class="btnrow no-print"><button class="btn" onclick="window.print()">Imprimir / Salvar em PDF</button><button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Voltar ao topo ↑</button></div></div></footer>
+<footer><div class="wrap"><strong>Plano de Desenvolvimento Profissional · Larissa</strong><p>Este roteiro é um ponto de partida flexível. Recursos externos podem mudar. Priorize estudo consistente, aplicação responsável, colaboração e reflexão. O objetivo é desenvolver capacidade profissional sustentável, não correr atrás de um título a qualquer custo.</p><p>Para guardar uma cópia, use “Imprimir / Salvar em PDF” no navegador. Seu progresso e suas notas são sincronizados pela nuvem e compartilhados com qualquer pessoa que tenha o link deste painel.</p><div class="btnrow no-print"><button class="btn" onclick="window.print()">Imprimir / Salvar em PDF</button><button class="btn secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Voltar ao topo ↑</button></div></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// CONFIGURE estes dois valores depois de criar seu projeto no Supabase.
+// Configure a URL e a chave PUBLICÁVEL do seu projeto Supabase.
+// A chave publicável/anon pode ficar no navegador. Nunca coloque service_role aqui.
 const SUPABASE_URL = 'https://larihe01.github.io/meu-painel-marketing/';
 const SUPABASE_ANON_KEY = 'sb_publishable_VH0IUQr1KRNM8Bp3n_GwQQ_CjhtcAM1';
 const configured = !SUPABASE_URL.startsWith('COLE_') && !SUPABASE_ANON_KEY.startsWith('COLE_');
 let supabaseClient = null;
-let currentUser = null;
 let saveTimer = null;
-let recoveryMode = false;
 const $ = id => document.getElementById(id);
 const diaryIds = ['weekDate','learned','applied','questions','next'];
 const roadmapBoxes = [...document.querySelectorAll('#roteiro input[type="checkbox"]')];
 const allBoxes = [...document.querySelectorAll('input[type="checkbox"]')];
-function message(text, error=false){ $('authMessage').textContent=text; $('authMessage').style.color=error?'#a12d2d':'#61717f'; }
 function updateProgress(){const done=roadmapBoxes.filter(b=>b.checked).length;const pct=Math.round(done/roadmapBoxes.length*100);$('progressText').textContent=`${done} de ${roadmapBoxes.length} (${pct}%)`;$('progressFill').style.width=pct+'%';}
 function collectState(){const checks={};allBoxes.forEach(b=>{if(b.id)checks[b.id]=b.checked});const diary={};diaryIds.forEach(id=>diary[id]=$(id).value);return {checks,diary};}
-async function saveState(){if(!currentUser)return;const state=collectState();const {error}=await supabaseClient.from('roadmap_state').upsert({user_id:currentUser.id,checkboxes:state.checks,diary:state.diary,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)console.error('Falha ao salvar progresso:',error.message);}
+async function saveState(){if(!supabaseClient)return;const state=collectState();const {error}=await supabaseClient.from('roadmap_state').upsert({id:'main',checkboxes:state.checks,diary:state.diary,updated_at:new Date().toISOString()},{onConflict:'id'});if(error){console.error('Falha ao salvar progresso:',error.message);$('cloudStatus').textContent='Não foi possível sincronizar. Confira a configuração do Supabase.';}else{$('cloudStatus').textContent='Painel sincronizado na nuvem · conteúdo compartilhado';}}
 function scheduleSave(){updateProgress();clearTimeout(saveTimer);saveTimer=setTimeout(saveState,450);}
-async function loadState(){const {data,error}=await supabaseClient.from('roadmap_state').select('checkboxes,diary').eq('user_id',currentUser.id).maybeSingle();if(error){console.error(error);return;}if(data){Object.entries(data.checkboxes||{}).forEach(([id,value])=>{const el=$(id);if(el&&el.type==='checkbox')el.checked=!!value});Object.entries(data.diary||{}).forEach(([id,value])=>{const el=$(id);if(el)el.value=value||''});}updateProgress();}
+async function loadState(){const {data,error}=await supabaseClient.from('roadmap_state').select('checkboxes,diary').eq('id','main').maybeSingle();if(error){console.error(error);$('cloudStatus').textContent='Erro ao carregar o progresso. Confira o SQL e as chaves do Supabase.';return;}if(data){Object.entries(data.checkboxes||{}).forEach(([id,value])=>{const el=$(id);if(el&&el.type==='checkbox')el.checked=!!value});Object.entries(data.diary||{}).forEach(([id,value])=>{const el=$(id);if(el)el.value=value||''});}updateProgress();}
 function safeText(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-async function loadEntries(){const {data,error}=await supabaseClient.from('workspace_entries').select('*').eq('user_id',currentUser.id).order('created_at',{ascending:false});if(error){$('entriesList').innerHTML='<div class="card span-12">Não foi possível carregar os registros. Confira a configuração do banco.</div>';console.error(error);return;} $('entryCount').textContent=`${data.length} registro(s)`;if(!data.length){$('entriesList').innerHTML='<div class="card span-12">Você ainda não salvou registros. Use o formulário acima para começar.</div>';return;} $('entriesList').innerHTML=data.map(e=>`<article class="card span-6"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span class="tag">${safeText(e.category)}</span><span class="small">${safeText(e.status||'')}</span></div><h3>${safeText(e.title)}</h3><p style="white-space:pre-wrap">${safeText(e.content||'')}</p><p class="small">${e.due_date?'Data: '+safeText(e.due_date):''}</p><div class="btnrow"><button class="btn secondary" type="button" data-edit="${e.id}">Editar</button><button class="btn secondary" type="button" data-delete="${e.id}">Excluir</button></div></article>`).join('');}
+async function loadEntries(){const {data,error}=await supabaseClient.from('workspace_entries').select('*').order('created_at',{ascending:false});if(error){$('entriesList').innerHTML='<div class="card span-12">Não foi possível carregar os registros. Confira a configuração do banco.</div>';console.error(error);return;} $('entryCount').textContent=`${data.length} registro(s)`;if(!data.length){$('entriesList').innerHTML='<div class="card span-12">Você ainda não salvou registros. Use o formulário acima para começar.</div>';return;} $('entriesList').innerHTML=data.map(e=>`<article class="card span-6"><div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span class="tag">${safeText(e.category)}</span><span class="small">${safeText(e.status||'')}</span></div><h3>${safeText(e.title)}</h3><p style="white-space:pre-wrap">${safeText(e.content||'')}</p><p class="small">${e.due_date?'Data: '+safeText(e.due_date):''}</p><div class="btnrow"><button class="btn secondary" type="button" data-edit="${e.id}">Editar</button><button class="btn secondary" type="button" data-delete="${e.id}">Excluir</button></div></article>`).join('');}
 function resetEntryForm(){ $('entryForm').reset();$('entryId').value='';$('entrySave').textContent='Salvar registro';$('entryCancel').hidden=true; }
-$('entryForm').addEventListener('submit',async ev=>{ev.preventDefault();if(!currentUser)return;const id=$('entryId').value;const payload={user_id:currentUser.id,category:$('entryCategory').value,title:$('entryTitle').value.trim(),content:$('entryContent').value.trim(),status:$('entryStatus').value,due_date:$('entryDate').value||null};if(!payload.title)return;const request=id?supabaseClient.from('workspace_entries').update(payload).eq('id',id).eq('user_id',currentUser.id):supabaseClient.from('workspace_entries').insert(payload);const {error}=await request;if(error){alert('Não foi possível salvar. Confira sua conexão e a configuração do Supabase.');console.error(error);return;}resetEntryForm();await loadEntries();});
-$('entriesList').addEventListener('click',async ev=>{const edit=ev.target.closest('[data-edit]');const del=ev.target.closest('[data-delete]');if(edit){const {data,error}=await supabaseClient.from('workspace_entries').select('*').eq('id',edit.dataset.edit).eq('user_id',currentUser.id).single();if(error)return; $('entryId').value=data.id;$('entryCategory').value=data.category;$('entryTitle').value=data.title;$('entryContent').value=data.content||'';$('entryStatus').value=data.status||'Não iniciado';$('entryDate').value=data.due_date||'';$('entrySave').textContent='Atualizar registro';$('entryCancel').hidden=false;$('entryForm').scrollIntoView({behavior:'smooth'});}if(del&&confirm('Excluir este registro?')){const {error}=await supabaseClient.from('workspace_entries').delete().eq('id',del.dataset.delete).eq('user_id',currentUser.id);if(!error)loadEntries();}});
+$('entryForm').addEventListener('submit',async ev=>{ev.preventDefault();const id=$('entryId').value;const payload={category:$('entryCategory').value,title:$('entryTitle').value.trim(),content:$('entryContent').value.trim(),status:$('entryStatus').value,due_date:$('entryDate').value||null};if(!payload.title)return;const request=id?supabaseClient.from('workspace_entries').update(payload).eq('id',id):supabaseClient.from('workspace_entries').insert(payload);const {error}=await request;if(error){alert('Não foi possível salvar. Confira a conexão e a configuração do Supabase.');console.error(error);return;}resetEntryForm();await loadEntries();});
+$('entriesList').addEventListener('click',async ev=>{const edit=ev.target.closest('[data-edit]');const del=ev.target.closest('[data-delete]');if(edit){const {data,error}=await supabaseClient.from('workspace_entries').select('*').eq('id',edit.dataset.edit).single();if(error)return; $('entryId').value=data.id;$('entryCategory').value=data.category;$('entryTitle').value=data.title;$('entryContent').value=data.content||'';$('entryStatus').value=data.status||'Não iniciado';$('entryDate').value=data.due_date||'';$('entrySave').textContent='Atualizar registro';$('entryCancel').hidden=false;$('entryForm').scrollIntoView({behavior:'smooth'});}if(del&&confirm('Excluir este registro?')){const {error}=await supabaseClient.from('workspace_entries').delete().eq('id',del.dataset.delete);if(!error)loadEntries();}});
 $('entryCancel').addEventListener('click',resetEntryForm);
-$('saveDiary').addEventListener('click',async()=>{if(!currentUser)return;const vals=diaryIds.map(id=>$(id).value.trim());if(!vals.some(Boolean)){alert('Preencha pelo menos um campo da reflexão.');return;}const content=`O que aprendi:\n${vals[1]}\n\nO que apliquei ou observei:\n${vals[2]}\n\nO que preciso entender:\n${vals[3]}\n\nPrioridade da próxima semana:\n${vals[4]}`;const {error}=await supabaseClient.from('workspace_entries').insert({user_id:currentUser.id,category:'Diário',title:'Reflexão da semana '+(vals[0]||new Date().toLocaleDateString('pt-BR')),content,status:'Concluído',due_date:vals[0]||null});if(error){alert('Não foi possível salvar a reflexão.');console.error(error);return;}await loadEntries();alert('Reflexão salva em Meus registros.');});
+$('saveDiary').addEventListener('click',async()=>{const vals=diaryIds.map(id=>$(id).value.trim());if(!vals.some(Boolean)){alert('Preencha pelo menos um campo da reflexão.');return;}const content=`O que aprendi:\n${vals[1]}\n\nO que apliquei ou observei:\n${vals[2]}\n\nO que preciso entender:\n${vals[3]}\n\nPrioridade da próxima semana:\n${vals[4]}`;const {error}=await supabaseClient.from('workspace_entries').insert({category:'Diário',title:'Reflexão da semana '+(vals[0]||new Date().toLocaleDateString('pt-BR')),content,status:'Concluído',due_date:vals[0]||null});if(error){alert('Não foi possível salvar a reflexão.');console.error(error);return;}await loadEntries();alert('Reflexão salva em Meus registros.');});
 $('exportNotes').addEventListener('click',()=>{const fields=[['Semana de','weekDate'],['O que aprendi','learned'],['O que apliquei ou observei','applied'],['O que preciso entender','questions'],['Prioridade da próxima semana','next']];const content=fields.map(([label,id])=>label+':\n'+$(id).value+'\n').join('\n');const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='diario-aprendizagem.txt';a.click();URL.revokeObjectURL(url);});
 $('clearNotes').addEventListener('click',()=>{if(confirm('Limpar os campos do diário?')){diaryIds.forEach(id=>$(id).value='');scheduleSave();}});
 allBoxes.forEach(b=>b.addEventListener('change',scheduleSave));diaryIds.forEach(id=>$(id).addEventListener('input',scheduleSave));
-async function showApp(user){currentUser=user;$('authGate').hidden=true;$('appShell').hidden=false;$('signedUser').textContent='Conectado: '+user.email;await loadState();await loadEntries();}
-async function signOut(){await supabaseClient.auth.signOut();currentUser=null;$('appShell').hidden=true;$('authGate').hidden=false;}
-$('logoutButton').addEventListener('click',signOut);
-function showRecoveryForm(){
- $('loginForm').style.display='none';
- $('resetPasswordForm').style.display='block';
- message('O link foi reconhecido. Crie e confirme sua nova senha abaixo.');
-}
-$('loginForm').addEventListener('submit',async ev=>{ev.preventDefault();if(!configured){message('Antes do login, configure a URL e a chave do Supabase no arquivo index.html.',true);return;}const btn=$('loginButton');btn.disabled=true;btn.textContent='Entrando...';const {data,error}=await supabaseClient.auth.signInWithPassword({email:$('loginEmail').value.trim(),password:$('loginPassword').value});btn.disabled=false;btn.textContent='Entrar';if(error){message('Não foi possível entrar. Confira e-mail e senha.',true);return;}message('Login realizado.');await showApp(data.user);});
-$('resetPasswordForm').addEventListener('submit',async ev=>{
- ev.preventDefault();
- const password=$('newPassword').value;
- const confirmation=$('confirmNewPassword').value;
- if(password.length<6){message('Use uma senha com pelo menos 6 caracteres.',true);return;}
- if(password!==confirmation){message('As senhas não são iguais. Confira os dois campos.',true);return;}
- const btn=$('resetPasswordButton');btn.disabled=true;btn.textContent='Salvando...';
- const {error}=await supabaseClient.auth.updateUser({password});
- btn.disabled=false;btn.textContent='Salvar nova senha';
- if(error){message('Não foi possível atualizar a senha: '+(error.message||'erro de autenticação')+'. Solicite um novo link somente depois de corrigirmos a sessão.',true);console.error('Falha ao atualizar senha:',error);return;}
- recoveryMode=false;
- await supabaseClient.auth.signOut();
- $('resetPasswordForm').style.display='none';$('loginForm').style.display='block';$('loginPassword').value='';$('newPassword').value='';$('confirmNewPassword').value='';
- message('Senha atualizada! Agora entre com seu e-mail e a nova senha.');
- history.replaceState(null,document.title,window.location.pathname);
-});
-if(configured&&window.supabase){
- // A recuperação é tratada explicitamente para garantir que o token do link
- // seja convertido em uma sessão antes de chamar updateUser().
- supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
-  auth:{detectSessionInUrl:false, persistSession:true, autoRefreshToken:true}
- });
- supabaseClient.auth.onAuthStateChange(async(event,session)=>{
-  if(event==='PASSWORD_RECOVERY'){recoveryMode=true;showRecoveryForm();return;}
-  if(event==='SIGNED_IN'&&session&&!currentUser&&!recoveryMode){await showApp(session.user);}
-  if(event==='SIGNED_OUT'){currentUser=null;$('appShell').hidden=true;$('authGate').hidden=false;}
- });
- (async()=>{
-  const hashParams=new URLSearchParams(window.location.hash.replace(/^#/,''));
-  const queryParams=new URLSearchParams(window.location.search);
-  const recoveryType=hashParams.get('type')||queryParams.get('type');
-  const accessToken=hashParams.get('access_token')||queryParams.get('access_token');
-  const refreshToken=hashParams.get('refresh_token')||queryParams.get('refresh_token');
-  if(recoveryType==='recovery'&&accessToken&&refreshToken){
-   recoveryMode=true;
-   const {error}=await supabaseClient.auth.setSession({access_token:accessToken,refresh_token:refreshToken});
-   if(error){console.error('Falha ao iniciar sessão de recuperação:',error);message('O link de recuperação não pôde iniciar uma sessão. Solicite um novo link depois de verificar a configuração.',true);return;}
-   history.replaceState(null,document.title,window.location.pathname);
-   showRecoveryForm();
-   return;
-  }
-  const {data,error}=await supabaseClient.auth.getSession();
-  if(error)console.error('Falha ao recuperar sessão:',error);
-  if(data?.session&&!currentUser)await showApp(data.session.user);
- })();
-}else{message('Configuração pendente: siga o arquivo LEIA-ME para conectar o Supabase.');}
+if(configured&&window.supabase){supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);(async()=>{await loadState();await loadEntries();$('cloudStatus').textContent='Painel sincronizado na nuvem · conteúdo compartilhado';})();}else{$('cloudStatus').textContent='Configuração pendente: adicione a URL e a chave publicável do Supabase no arquivo index.html.';}
 updateProgress();
 </script>
-</div>
 </body>
 </html>
