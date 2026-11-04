@@ -441,12 +441,13 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // CONFIGURE estes dois valores depois de criar seu projeto no Supabase.
-const SUPABASE_URL = 'https://tdjgfnsysjuzlyojnlbj.supabase.co/rest/v1/  ';
-const SUPABASE_ANON_KEY = 'sb_publishable_VH0IUQr1KRNM8Bp3n_GwQQ_CjhtcAM1';
+const SUPABASE_URL = 'https://tdjgfnsysjuzlyojnlbj.supabase.co/rest/v1/';
+const SUPABASE_ANON_KEY = 'sb_publishable_VH0IUQr1KRNM8Bp3n_GwQQ_CjhtcAM1 ';
 const configured = !SUPABASE_URL.startsWith('COLE_') && !SUPABASE_ANON_KEY.startsWith('COLE_');
 let supabaseClient = null;
 let currentUser = null;
 let saveTimer = null;
+let recoveryMode = false;
 const $ = id => document.getElementById(id);
 const diaryIds = ['weekDate','learned','applied','questions','next'];
 const roadmapBoxes = [...document.querySelectorAll('#roteiro input[type="checkbox"]')];
@@ -485,24 +486,42 @@ $('resetPasswordForm').addEventListener('submit',async ev=>{
  const btn=$('resetPasswordButton');btn.disabled=true;btn.textContent='Salvando...';
  const {error}=await supabaseClient.auth.updateUser({password});
  btn.disabled=false;btn.textContent='Salvar nova senha';
- if(error){message('Não foi possível atualizar a senha. Solicite um novo link de recuperação e tente novamente.',true);console.error(error);return;}
+ if(error){message('Não foi possível atualizar a senha: '+(error.message||'erro de autenticação')+'. Solicite um novo link somente depois de corrigirmos a sessão.',true);console.error('Falha ao atualizar senha:',error);return;}
+ recoveryMode=false;
  await supabaseClient.auth.signOut();
  $('resetPasswordForm').style.display='none';$('loginForm').style.display='block';$('loginPassword').value='';$('newPassword').value='';$('confirmNewPassword').value='';
  message('Senha atualizada! Agora entre com seu e-mail e a nova senha.');
  history.replaceState(null,document.title,window.location.pathname);
 });
 if(configured&&window.supabase){
- supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+ // A recuperação é tratada explicitamente para garantir que o token do link
+ // seja convertido em uma sessão antes de chamar updateUser().
+ supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{
+  auth:{detectSessionInUrl:false, persistSession:true, autoRefreshToken:true}
+ });
  supabaseClient.auth.onAuthStateChange(async(event,session)=>{
-  if(event==='PASSWORD_RECOVERY'){showRecoveryForm();return;}
-  if(event==='SIGNED_IN'&&session&&!currentUser){await showApp(session.user);}
+  if(event==='PASSWORD_RECOVERY'){recoveryMode=true;showRecoveryForm();return;}
+  if(event==='SIGNED_IN'&&session&&!currentUser&&!recoveryMode){await showApp(session.user);}
   if(event==='SIGNED_OUT'){currentUser=null;$('appShell').hidden=true;$('authGate').hidden=false;}
  });
- supabaseClient.auth.getSession().then(async({data})=>{
-  const recoveryInUrl=/type=recovery/i.test(window.location.hash+' '+window.location.search);
-  if(recoveryInUrl){showRecoveryForm();return;}
-  if(data.session&&!currentUser)await showApp(data.session.user);
- });
+ (async()=>{
+  const hashParams=new URLSearchParams(window.location.hash.replace(/^#/,''));
+  const queryParams=new URLSearchParams(window.location.search);
+  const recoveryType=hashParams.get('type')||queryParams.get('type');
+  const accessToken=hashParams.get('access_token')||queryParams.get('access_token');
+  const refreshToken=hashParams.get('refresh_token')||queryParams.get('refresh_token');
+  if(recoveryType==='recovery'&&accessToken&&refreshToken){
+   recoveryMode=true;
+   const {error}=await supabaseClient.auth.setSession({access_token:accessToken,refresh_token:refreshToken});
+   if(error){console.error('Falha ao iniciar sessão de recuperação:',error);message('O link de recuperação não pôde iniciar uma sessão. Solicite um novo link depois de verificar a configuração.',true);return;}
+   history.replaceState(null,document.title,window.location.pathname);
+   showRecoveryForm();
+   return;
+  }
+  const {data,error}=await supabaseClient.auth.getSession();
+  if(error)console.error('Falha ao recuperar sessão:',error);
+  if(data?.session&&!currentUser)await showApp(data.session.user);
+ })();
 }else{message('Configuração pendente: siga o arquivo LEIA-ME para conectar o Supabase.');}
 updateProgress();
 </script>
